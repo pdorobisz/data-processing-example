@@ -10,9 +10,7 @@ import pdorobisz.dataprocessing.datainput.api.model.{EventData, JsonSupport}
 import scala.io.StdIn
 
 
-object Main extends App with JsonSupport {
-
-  private val ServerPort = 8080
+object Main extends App with JsonSupport with Configuration {
 
   private implicit val system = ActorSystem("data-input-system")
   private implicit val materializer = ActorMaterializer()
@@ -33,9 +31,9 @@ object Main extends App with JsonSupport {
       }
     }
 
-  val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", ServerPort)
+  val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", httpPort)
 
-  println(s"Server online at $ServerPort/\nPress RETURN to stop...")
+  println(s"Server online at $httpPort/\nPress RETURN to stop...")
   StdIn.readLine()
 
   bindingFuture
