@@ -1,4 +1,13 @@
 apply plugin: 'scala'
+apply plugin: 'application'
+apply plugin: 'docker'
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
+    }
+}
 
 repositories{
     mavenCentral()
@@ -11,3 +20,9 @@ dependencies{
     compile 'com.typesafe.akka:akka-http_2.12:10.0.0'
     compile 'com.typesafe.akka:akka-http-spray-json_2.12:10.0.0'
 }
+
+docker {
+    baseImage "frolvlad/alpine-oraclejdk8:slim"
+}
+
+mainClassName = "pdorobisz.dataprocessing.datainput.Main"

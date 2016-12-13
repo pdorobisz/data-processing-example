@@ -33,7 +33,7 @@ object Main extends App with JsonSupport {
       }
     }
 
-  val bindingFuture = Http().bindAndHandle(route, "localhost", ServerPort)
+  val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", ServerPort)
 
   println(s"Server online at $ServerPort/\nPress RETURN to stop...")
   StdIn.readLine()
