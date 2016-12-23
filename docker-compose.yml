@@ -1,0 +1,8 @@
+version: '2'
+services:
+  data-input:
+    image: "data-input"
+    environment:
+     - JAVA_OPTS=-Ddataprocessing.datainput.http.port=${DATAPROCESSING_DATAINPUT_HTTP_PORT}
+    ports:
+     - "${DATAPROCESSING_DATAINPUT_HTTP_PORT}:${DATAPROCESSING_DATAINPUT_HTTP_PORT}"

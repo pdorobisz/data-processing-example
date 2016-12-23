@@ -7,8 +7,6 @@ import akka.http.scaladsl.server.Directives.{complete, get, path, pathSingleSlas
 import akka.stream.ActorMaterializer
 import pdorobisz.dataprocessing.datainput.api.model.{EventData, JsonSupport}
 
-import scala.io.StdIn
-
 
 object Main extends App with JsonSupport with Configuration {
 
@@ -31,12 +29,6 @@ object Main extends App with JsonSupport with Configuration {
       }
     }
 
-  val bindingFuture = Http().bindAndHandle(route, "0.0.0.0", httpPort)
-
-  println(s"Server online at $httpPort/\nPress RETURN to stop...")
-  StdIn.readLine()
-
-  bindingFuture
-    .flatMap(_.unbind())
-    .onComplete(_ => system.terminate())
+  Http().bindAndHandle(route, "0.0.0.0", httpPort)
+  println(s"Server started at $httpPort")
 }
