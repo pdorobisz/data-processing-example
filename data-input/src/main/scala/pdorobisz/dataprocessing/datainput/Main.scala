@@ -6,9 +6,11 @@ import akka.http.scaladsl.model.{ContentTypes, HttpEntity}
 import akka.http.scaladsl.server.Directives.{complete, get, path, pathSingleSlash, _}
 import akka.stream.ActorMaterializer
 import pdorobisz.dataprocessing.datainput.api.model.{EventData, JsonSupport}
+import pdorobisz.dataprocessing.datainput.kafka.KafkaUtil
+import spray.json._
 
 
-object Main extends App with JsonSupport with Configuration {
+object Main extends App with JsonSupport {
 
   private implicit val system = ActorSystem("data-input-system")
   private implicit val materializer = ActorMaterializer()
@@ -24,11 +26,12 @@ object Main extends App with JsonSupport with Configuration {
         entity(as[EventData]) {
           eventData =>
             println(eventData)
+            KafkaUtil.publish(eventData.toJson.toString)
             complete("ok")
         }
       }
     }
 
-  Http().bindAndHandle(route, "0.0.0.0", httpPort)
-  println(s"Server started at $httpPort")
+  Http().bindAndHandle(route, "0.0.0.0", Configuration.httpPort)
+  println(s"Server started at ${Configuration.httpPort}")
 }
