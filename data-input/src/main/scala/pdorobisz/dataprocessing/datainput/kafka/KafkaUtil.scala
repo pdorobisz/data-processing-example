@@ -20,8 +20,8 @@ object KafkaUtil {
 
   private val producer = new KafkaProducer[Integer, String](props)
 
-  def publish(data: String): Unit = {
-    val record = new ProducerRecord[Integer, String]("test", data)
+  def publish(topic: String, data: String): Unit = {
+    val record = new ProducerRecord[Integer, String](topic, data)
     producer.send(record)
   }
 }

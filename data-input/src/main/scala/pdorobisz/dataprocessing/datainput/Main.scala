@@ -26,7 +26,7 @@ object Main extends App with JsonSupport {
         entity(as[EventData]) {
           eventData =>
             println(eventData)
-            KafkaUtil.publish(eventData.toJson.toString)
+            KafkaUtil.publish(eventData.level.toString.toLowerCase, eventData.toJson.toString)
             complete("ok")
         }
       }

@@ -13,7 +13,8 @@ services:
     environment:
       HOSTNAME_COMMAND: "hostname -i"
       KAFKA_ADVERTISED_PORT: 9092
-      KAFKA_CREATE_TOPICS: "test:1:1"
+      KAFKA_CREATE_TOPICS: "info:1:1,warning:1:1,error:1:1"
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
   data-input:
     image: "data-input"
