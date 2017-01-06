@@ -2,6 +2,8 @@ apply plugin: 'scala'
 apply plugin: 'application'
 apply plugin: 'docker'
 
+group="data-processing-example"
+
 buildscript {
     repositories { jcenter() }
     dependencies {

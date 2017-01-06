@@ -17,7 +17,7 @@ services:
       KAFKA_AUTO_CREATE_TOPICS_ENABLE: "false"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
   data-input:
-    image: "data-input"
+    image: "data-processing-example/data-input"
     environment:
       JAVA_OPTS: "-Ddataprocessing.datainput.http.port=${DATAPROCESSING_DATAINPUT_HTTP_PORT} -Ddataprocessing.kafka.server.host=kafka"
     ports:
