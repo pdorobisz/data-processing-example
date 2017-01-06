@@ -1,4 +1,15 @@
 apply plugin: 'scala'
+apply plugin: 'application'
+apply plugin: 'docker'
+
+group="data-processing-example"
+
+buildscript {
+    repositories { jcenter() }
+    dependencies {
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
+    }
+}
 
 repositories{
     mavenCentral()
@@ -13,3 +24,9 @@ dependencies{
     compile group: 'org.apache.spark', name: 'spark-streaming_2.11', version: '2.1.0'
     compile group: 'org.apache.spark', name: 'spark-streaming-kafka-0-10_2.11', version: '2.1.0'
 }
+
+docker {
+    baseImage "frolvlad/alpine-oraclejdk8:slim"
+}
+
+mainClassName = "pdorobisz.dataprocessing.spark.Main"

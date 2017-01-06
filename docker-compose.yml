@@ -24,3 +24,11 @@ services:
       - "${DATAPROCESSING_DATAINPUT_HTTP_PORT}:${DATAPROCESSING_DATAINPUT_HTTP_PORT}"
     links:
       - kafka
+  spark-processing:
+    image: "data-processing-example/spark-processing"
+    environment:
+      JAVA_OPTS: "-Xmx512m -Ddataprocessing.kafka.server.host=kafka"
+    ports:
+      - "4040:4040"
+    links:
+      - kafka
